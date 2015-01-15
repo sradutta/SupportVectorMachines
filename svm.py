@@ -65,10 +65,11 @@ plt.show()
 
 #apply the SVC module to the first two flowers -- serasota and versicolor contained in 0--100
 from sklearn import svm
-svc = svm.SVC(kernel='linear')
+svc = svm.SVC(C = 1, kernel='linear') #the value of C gives us soft or hard margin
 X = iris.data[0:100, 1:3] #choose col 1 and 2 for rows 0--100
 y = iris.target[0:100] #choose only the first two flowers which are in 0--100
 svc.fit(X,y)
+print(svc.fit(X,y).score(X,y)) 
 
 #visualizing the above results
 #Adapted from https://github.com/jakevdp/sklearn_scipy2013
@@ -108,6 +109,7 @@ plt.show()
 X = iris.data[0:, 1:3] #choose col 1 and 2 for all the rows 
 y = iris.target[0:] #choose all the flowers 
 svc.fit(X,y)
+print(svc.fit(X,y).score(X,y)) 
 
 cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA', '#AAAAFF'])
 cmap_bold = ListedColormap(['#FF0000', '#00FF00', '#0000FF'])
@@ -133,3 +135,5 @@ plot_estimator(svc, X, y)
 plt.show()
 
 '''the code is not much different when three flowers are classified. The margins and the line changes based on x_min, x_max, y_min, y_max and if we are using 100 or 500 or other numbers for meshgrid.'''
+
+'''using the default value of c = 1; higher value of C means hard margin; lower values of C means softer margin; thus, the margins can be made soft/hard based on the value of the C.''' 
